@@ -1,12 +1,175 @@
 #!/bin/sh
+# -----------------------------------------------------------------------------
+# clj  - Start Script for the Clojure interperter
+# Shamelessly stolen from the jruby startup script,
+# jruby.sh
+#
+# Environment Variable Prequisites
+#
+#   REPL_CLASS    Java class to use as a repl if we are doing a repl
+#   JAVA_HOME     Optional pointer to java install. If not set, will
+#                 use the java on your path.
+#
+# -----------------------------------------------------------------------------
 
+# $1 is the argument name, and $2 is the number of arguments left.
+arg_check() {
+  if [ $2 -lt 2 ]; then
+    error "$PRG_NAME: option requires an argument -- $1"
+  fi
+}
 
-BinDir=`dirname $0`
-BinDir=`cd $BinDir;pwd`
-DejureDir=`dirname $BinDir`
-LibDir=$DejureDir/lib
+cygwin=false
 
-Jars="$LibDir/*.jar"
-CP=`echo $Jars | sed 's/ /:/g'`
+# ----- Identify OS we are running under --------------------------------------
+case "`uname`" in
+  CYGWIN*) cygwin=true;;
+esac
 
-java -cp $CP jline.ConsoleRunner clojure.main "$@"
+# Figure out where clojure is installed
+
+PRG=$0
+progname=`basename "$0"`
+
+while [ -h "$PRG" ] ; do
+  ls=`ls -ld "$PRG"`
+  link=`expr "$ls" : '.*-> \(.*\)$'`
+  if expr "$link" : '.*/.*' > /dev/null; then
+    if expr "$link" : '^/' > /dev/null; then
+      PRG="$link"
+    else
+      PRG="`dirname ${PRG}`/${link}"
+    fi
+  else
+    PRG="`dirname $PRG`/$link"
+  fi
+done
+
+CLOJURE_HOME_1=`dirname "$PRG"`           # the ./bin dir
+if [ "$CLOJURE_HOME_1" = '.' ] ; then
+  cwd=`pwd`
+  CLOJURE_HOME=`dirname $cwd` #
+else
+  CLOJURE_HOME=`dirname "$CLOJURE_HOME_1"`  # the . dir
+fi
+
+# Determine what we are going to use for java.
+
+if [ -z "$JAVA_HOME" ] ; then
+  JAVA_CMD='java'
+else
+  if $cygwin; then
+    JAVA_HOME=`cygpath -u "$JAVA_HOME"`
+  fi
+  JAVA_CMD="$JAVA_HOME/bin/java"
+fi
+
+# Set up the classpath
+
+CLOJURE_LIB=$CLOJURE_HOME/lib
+
+CP_DELIMITER=":"
+
+# add jruby jars for command-line execution
+
+CLOJURE_JAR=$CLOJURE_LIB/clojure.jar
+CLOJURE_CP=$CLOJURE_JAR
+
+for jarfile in "$CLOJURE_LIB"/*.jar; do
+    if [ "$jarfile" != "$CLOJURE_JAR" ]; then
+        CLOJURE_CP="$CLOJURE_CP$CP_DELIMITER$jarfile"
+    fi
+done
+
+echo $CLOJURE_CP
+
+if $cygwin; then
+    CLOJURE_CP=`cygpath -p -w "$CLOJURE_CP"`
+fi
+
+if $cygwin; then
+   CP=`cygpath -p -w "$CP"`
+fi
+
+if $cygwin; then
+    # switch delimiter only after building Unix style classpaths
+    CP_DELIMITER=";"
+fi
+
+JAVA_ARGS=""
+CLOJURE_ARGS=""
+CLOJURE_JLINE=jline.ConsoleRunner
+CLOJURE_MAIN=clojure.main
+
+while [ $# -gt 0 ]
+do
+    case "$1" in
+    --)
+       arg_check "$1" $#
+       shift
+       CLOJURE_ARGS="$CLOJURE_ARGS $*"
+       break;
+    ;;
+
+    -cp)
+       arg_check "$1" $#
+       shift
+       CLOJURE_CP="$CLOJURE_CP:$1"
+    ;;
+
+    -classpath)
+       arg_check "$1" $#
+       shift
+       CLOJURE_CP="$CLOJURE_CP:$1"
+    ;;
+
+    -D*)
+       JAVA_ARGS="$JAVA_ARGS $1"
+    ;;
+
+    -X*)
+       JAVA_ARGS="$JAVA_ARGS $1"
+    ;;
+
+    -client)
+       JAVA_ARGS="$JAVA_ARGS $1"
+    ;;
+
+    -server)
+       JAVA_ARGS="$JAVA_ARGS $1"
+    ;;
+
+    -hotspot)
+       JAVA_ARGS="$JAVA_ARGS $1"
+    ;;
+
+    -jline)
+       CLOJURE_JLINE=jline.ConsoleRunner
+    ;;
+
+    -no-jline)
+       CLOJURE_JLINE=
+    ;;
+
+    -repl-class)
+       arg_check "$1" $#
+       shift
+       CLOJURE_MAIN=$1
+    ;;
+
+    -J)
+       arg_check "$1" $#
+       shift
+       JAVA_ARGS="$JAVA_ARGS $1"
+    ;;
+    *)
+       CLOJURE_ARGS="$CLOJURE_ARGS $1"
+    ;;
+    esac
+    shift
+done
+
+echo $JAVA_ARGS
+echo $CLOJURE_ARGS
+set -x
+java -classpath $CLOJURE_CP $JAVA_ARGS $CLOJURE_JLINE $CLOJURE_MAIN $CLOJURE_ARGS
