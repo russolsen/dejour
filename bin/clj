@@ -1,0 +1,12 @@
+#!/bin/sh
+
+
+BinDir=`dirname $0`
+BinDir=`cd $BinDir;pwd`
+DejureDir=`dirname $BinDir`
+LibDir=$DejureDir/lib
+
+Jars="$LibDir/*.jar"
+CP=`echo $Jars | sed 's/ /:/g'`
+
+java -cp $CP jline.ConsoleRunner clojure.main "$@"

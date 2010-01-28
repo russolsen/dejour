@@ -1,0 +1,19 @@
+
+<project name="dejure" basedir="." default="all">
+
+  <target name="all">
+    <mkdir dir="lib"/>
+    <copy todir="lib" flatten="true">
+      <fileset dir="${basedir}/..">
+        <include name="clojure-*/clojure.jar"/>
+        <include name="clojure-contrib*/clojure-contrib.jar"/>
+        <include name="jline*/jline*.jar"/>
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="clean">
+    <delete dir="lib"/>
+  </target>
+
+</project>
