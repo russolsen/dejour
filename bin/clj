@@ -9,6 +9,7 @@
 #   REPL_CLASS    Java class to use as a repl if we are doing a repl
 #   JAVA_HOME     Optional pointer to java install. If not set, will
 #                 use the java on your path.
+#                 Also borrowed some code from Mark Reid's clj script
 #
 # -----------------------------------------------------------------------------
 
@@ -21,7 +22,7 @@ arg_check() {
 
 cygwin=false
 
-# ----- Identify OS we are running under --------------------------------------
+# Identify the os we are running under
 case "`uname`" in
   CYGWIN*) cygwin=true;;
 esac
