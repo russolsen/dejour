@@ -74,15 +74,13 @@ CP_DELIMITER=":"
 # add jruby jars for command-line execution
 
 CLOJURE_JAR=$CLOJURE_LIB/clojure.jar
-CLOJURE_CP=$CLOJURE_JAR
+CLOJURE_CP=.:$CLOJURE_JAR
 
 for jarfile in "$CLOJURE_LIB"/*.jar; do
     if [ "$jarfile" != "$CLOJURE_JAR" ]; then
         CLOJURE_CP="$CLOJURE_CP$CP_DELIMITER$jarfile"
     fi
 done
-
-echo $CLOJURE_CP
 
 if $cygwin; then
     CLOJURE_CP=`cygpath -p -w "$CLOJURE_CP"`
@@ -170,7 +168,4 @@ do
     shift
 done
 
-echo $JAVA_ARGS
-echo $CLOJURE_ARGS
-set -x
 java -classpath $CLOJURE_CP $JAVA_ARGS $CLOJURE_JLINE $CLOJURE_MAIN $CLOJURE_ARGS
