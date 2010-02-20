@@ -1,0 +1,57 @@
+h2. Dejure
+
+Dejure provides an easy, 'works out of the box' for the Clojure programming language. Clojure is a function LISP JVM hosted variant that is great for concurrent programming. You can find the clojure source and original downloads at http://clojure.org/. 
+
+Unfortunately, while clojure.org provides the superb Clojure language as well as clojure-contrib, which is a set of useful libraries, there are a few things missing. The most important missing bit is a script that will run Clojure. Also missing is the very useful jline, which provides you with command editing when you are running the interactive clojure interpreter.
+
+The Dejure project pulls all of this together in a single easy to get, easy to install download. Dejure currently works on Linux and Macs, with a windows version coming soon.
+
+h2. Installing Dejure
+
+Installing Dejure is a very simple project: Just download the latest Dejure archive from:
+
+http://github.com/russolsen/dejour/downloads
+
+Then unpack it into the directory of your choice. You will end up with a directory with a name like dejure-1.1.0. Inside that directory is a bin directory, containing a script, clj. If you run the script with no parameters, clj will bring up the interactive clojure 'interpreter': You can simply type in clojure code and immediately see the results. Alternatively, if you supply clj with the name of a clojure script, it will run that script.
+
+h2. Examples
+
+Dejure also comes with some simple examples of Clojure code from my "Clojure, the least you need to know" talk. You will find these in the examples subdirectory.
+
+h2. Using the clj script
+
+The clj script is designed to be as simple for beginners to use as it can be, but it is capable of doing more elaborate things. Here are the arguments that clj understands:
+
+ * -no-jline Don't use jline
+
+ * -cp <jar or directory> Add the next argument to the classpath
+
+ * -classpath <jar or directory> Add the next argument to the classpath
+
+ * -Dname=value Define the given Java system property, passed directly to java.
+
+ * -Xjava-option Passed directly to Java
+
+ * -client Use the java client VM
+
+ * -server Use the java server VM
+
+ * -hotspot Turn on java hotspot
+
+ * -J java-option Pass the next argument directly to java.
+ 
+ * -- Treat everything that follows as a clojure argument
+
+Dejure will use the java program indicated by JAVA_HOME or from your path. If you have both, JAVA_HOME wins.
+
+
+h2. Contributors
+
+Dejure was created by "Russ Olsen":http://github.com/russolsen and is, of course, based on Clojure, clojure-contrib and jline. 
+
+See my website at "russolsen.com":http://www.russolsen.com
+
+h2. License
+
+Copyright (c) 2010 Russ Olsen and released under the Apache 2.0 license.
+
