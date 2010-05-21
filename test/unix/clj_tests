@@ -1,0 +1,65 @@
+#!/bin/sh 
+
+PATH=../../build/dejour-1.1.0/bin:$PATH
+export PATH
+
+. testutils.sh
+
+# Simple use
+
+should_match 'clojure.jar'              'clj -debug'
+should_match 'clojure-contrib.jar'      'clj -debug'
+should_match 'jline.jar'                'clj -debug'
+should_match 'jline.ConsoleRunner'      'clj -debug'
+should_match 'clojure.main$'            'clj -debug'
+
+# REPL class
+
+should_not_match 'clojure.main'         'clj -debug -repl-class repl'
+should_match 'repl$'                    'clj -debug -repl-class repl'
+
+# No jline
+
+should_not_match 'jline.jar'            'clj -debug -no-jline'
+should_not_match 'jline.ConsoleRunner'  'clj -debug -no-jline'
+
+# no contrib
+
+should_not_match 'clojure-contrib.jar'  'clj -debug -no-contrib'
+
+# -classpath and -cp
+
+should_match 'extra_stuff'              'clj -debug -cp extra_stuff'
+should_match 'extra_stuff'              'clj -debug -classpath extra_stuff'
+
+# Args to clojure program
+
+should_match 'clojure.main.*foo bar$'   'clj -debug foo bar'
+should_match 'clojure.main.*foo bar$'   'clj -debug -- foo bar'
+
+# Java args
+
+should_match '-Dfoo=bar.*clojure.main'  'clj -debug -Dfoo=bar'
+should_match '-Xfoo=bar.*clojure.main'  'clj -debug -Xfoo=bar'
+should_match '-server.*clojure.main'    'clj -debug -server'
+should_match '-client.*clojure.main'    'clj -debug -client'
+should_match '-hotspot.*clojure.main'   'clj -debug -hotspot'
+should_match ' -ZZZ.*clojure.main'      'clj -debug -J -ZZZ'
+
+# CLASSPATH
+
+CLASSPATH=from_classpath
+export CLASSPATH
+should_match 'from_classpath'           'clj -debug'
+
+should_not_match 'from_classpath'       'clj -debug -cp extra_stuff'
+should_match 'extra_stuff'              'clj -debug -cp extra_stuff'
+
+# JAVA_HOME
+
+JAVA_HOME=some_jvm
+export JAVA_HOME
+should_match '^some_jvm/bin/java '      'clj -debug'
+
+JAVA_HOME=
+should_match '^java '                   'clj -debug'
