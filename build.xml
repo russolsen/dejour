@@ -1,15 +1,17 @@
-<project name="dejure" basedir="." default="all">
+<project name="dejour" basedir="." default="all">
 
   <property name="clojure-version" value="1.1.0" />
   <property name="clojure-contrib-version" value="1.1.0" />
   <property name="jline-version" value="0.9.94" />
 
-  <property name="dejure-version" value="${clojure-version}" />
+  <property name="dejour-version" value="${clojure-version}" />
 
-  <property name="staging-dir" value="build/dejure-${dejure-version}"/>
+  <property name="staging-dir" value="build/dejour-${dejour-version}"/>
 
   <target name="init">
     <mkdir dir="${staging-dir}"/>
+    <mkdir dir="${staging-dir}/lib"/>
+    <mkdir dir="${staging-dir}/cljlib"/>
   </target>
 
   <target name="clojure.zip" depends="init" unless="skip.download">
@@ -18,7 +20,7 @@
   </target>
 
   <target name="clojure.jar" depends="clojure.zip">
-    <unzip src="build/clojure.zip" dest="${staging-dir}/lib">
+    <unzip src="build/clojure.zip" dest="${staging-dir}/cljlib">
       <patternset>
         <include name="**/clojure.jar"/>
       </patternset>
@@ -32,7 +34,7 @@
   </target>
 
   <target name="clojure-contrib.jar" depends="clojure-contrib.zip">
-    <unzip src="build/clojure-contrib.zip" dest="${staging-dir}/lib">
+    <unzip src="build/clojure-contrib.zip" dest="${staging-dir}/cljlib">
       <patternset>
         <include name="**/clojure-contrib.jar"/>
       </patternset>
@@ -42,32 +44,38 @@
 
   <target name="jline.jar" depends="init" unless="skip.download">
     <get src="http://mirrors.ibiblio.org/pub/mirrors/maven2/jline/jline/${jline-version}/jline-${jline-version}.jar"
-    dest="${staging-dir}/lib/jline.jar" />
+    dest="${staging-dir}/cljlib/jline.jar" />
   </target>
 
   <target name="downloaded-jars" 
           depends="clojure.jar,clojure-contrib.jar,jline.jar" />
 
-  <target name="build.dejure" depends="downloaded-jars">
+  <target name="build.dejour" depends="downloaded-jars">
     <copy todir="${staging-dir}" >
       <fileset dir="${basedir}" includes="bin/**/*"/>
       <fileset dir="${basedir}" includes="examples/**/*"/>
     </copy>
+    <chmod file="${staging-dir}/bin/clj" perm="ugo+x"/>
   </target>
 
-  <target name="all" depends="dejure.tar"/>
+  <target name="all" depends="dejour.tar"/>
 
-  <target name="dejure.tar" depends="build.dejure">
-    <tar destfile="build/dejure-${dejure-version}.tar">
+  <target name="dejour.tar" depends="build.dejour">
+    <tar destfile="build/dejour-${dejour-version}.tar">
       <tarfileset dir="build" filemode="755">
-        <include name="dejure-${dejure-version}/bin/**/*"/>
+        <include name="dejour-${dejour-version}/bin/**/*"/>
       </tarfileset>
       <tarfileset dir="build">
-        <include name="dejure-${dejure-version}/**/*"/>
-        <exclude name="dejure-${dejure-version}/bin/**/*"/>
+        <include name="dejour-${dejour-version}/**/*"/>
+        <exclude name="dejour-${dejour-version}/bin/**/*"/>
       </tarfileset>
     </tar>
   </target>
+
+  <target name="test">
+    <exec dir="test/unix" failonerror="true" executable="clj_tests"/>
+  </target>
+
 
   <target name="clean">
     <delete dir="build" />
