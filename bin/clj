@@ -1,16 +1,30 @@
 #!/bin/sh
 # -----------------------------------------------------------------------------
 # clj  - Start Script for the Clojure interperter
-# Shamelessly stolen from the clojure startup script,
-# clojure.sh
+# Shamelessly stolen from the Jruby startup script,
+# jruby.sh. Also borrowed some code from Mark Reid's clj script
 #
-# Environment Variable Prequisites
+# Options:
+# -debug Just print out the java cmd and exit. 
+# -no-jline Don't use jline
+# -no-contrib Don't use clojure-contrib
+# -cp <jar or directory> Add the next argument to the classpath
+# -classpath <jar or directory> Add the next argument to the classpath
+# -Dname=value Define the given Java system property, passed directly to java.
+# -Xjava-option Passed directly to Java
+# -client Use the java client VM
+# -server Use the java server VM
+# -hotspot Turn on java hotspot
+# -J java-option Pass the next argument directly to java.
+# -- Treat everything that follows as a clojure argument
 #
-#   REPL_CLASS    Java class to use as a repl if we are doing a repl
-#   JAVA_HOME     Optional pointer to java install. If not set, will
-#                 use the java on your path.
-#                 Also borrowed some code from Mark Reid's clj script
+# clj will assume that any argument that it doesn't recognize is
+# the start of the arguments for clojure. Thus 
 #
+#   clj my_clojure_file.clj -first_arg -second_arg
+#
+# Will run clojure_file.clj and pass the two args to it.
+# 
 # -----------------------------------------------------------------------------
 
 # $1 is the argument name, and $2 is the number of arguments left.
