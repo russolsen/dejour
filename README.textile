@@ -22,7 +22,11 @@ h2. Using the clj script
 
 The clj script is designed to be as simple for beginners to use as it can be, but it is capable of doing more elaborate things. Here are the arguments that clj understands:
 
+ * -debug Just print out the java command and exit.
+
  * -no-jline Don't use jline
+
+ * -no-contrib Don't use clojure-contrib
 
  * -cp <jar or directory> Add the next argument to the classpath
 
@@ -47,7 +51,8 @@ Dejure will use the java program indicated by JAVA_HOME or from your path. If yo
 
 h2. Contributors
 
-Dejure was created by "Russ Olsen":http://github.com/russolsen and is, of course, based on Clojure, clojure-contrib and jline. 
+Dejure was created by "Russ Olsen":http://github.com/russolsen and is, of course, based on Clojure, clojure-contrib and jline.  Much of the clj script was hamelessly stolen from the Jruby startup script,jruby.sh. Also borrowed some code from Mark Reid's clj script.
+
 
 See my website at "russolsen.com":http://www.russolsen.com
 
