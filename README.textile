@@ -28,9 +28,9 @@ The clj script and executable are designed to be very simple for beginners to us
 
  * @-no-contrib@ Don't use clojure-contrib
 
- * @-cp@ _<jar or directory>_ Add the next argument to the classpath
+ * @-cp <jar or directory>@ Add the next argument to the classpath
 
- * @-classpath@ _<jar or directory>_ Add the next argument to the classpath
+ * @-classpath <jar or directory>@ Add the next argument to the classpath
 
  * @-Dname=value@ Define the given Java system property, passed directly to java.
 
@@ -55,31 +55,36 @@ If you just want the clojure REPL (i.e. interactive shell), simply run the clj s
 <pre><code>
     $ clj
     Clojure 1.1.0
-    user=> 
+    user=>
+
 </code></pre>
 
 If you want to execute a file full of clojure code, call out the file on after clj:
 
 <pre><code>
   clj my-clojure-code.clj
+
 </code></pre>
 
 If you want to pass arguments to your clojure script, just hang them on the end of the command:
 
 <pre><code>
   clj my-clojure-code.clj some arguments
+
 </code></pre>
 
 If you need to pass a -D or -X argument to java, put it before the clojure file:
 
 <pre><code>
   clj -Xmx500M -DFoo=bar  my-clojure-code.clj some arguments
+
 </code></pre>
 
 If you have other java VM arguments, you can pass them in via the -J option:
 
 <pre><code>
   clj -J -d32
+
 </code></pre>
 
 Dejour also comes with some simple examples of Clojure code from my "Clojure, the least you need to know" talk. You will find these in the examples subdirectory.
