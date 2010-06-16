@@ -12,7 +12,7 @@ Step one is to download the latest Dejour jar or zip from:
 
 http://github.com/russolsen/dejour/downloads
 
-Step two is to unpack Dejuour. You will end up with a directory with a name like dejour-1.1.0. Inside that directory is a bin directory, containing a Linux/Mac script, clj as well as a couple of Windows executables. If you are running on Linux or a Mac, you can run clojure by running the clj script. If you are on windows you have a choice of clj.exe which will run clojure with a console or cljw.exe which will run clojure without a console.
+Step two is to unpack Dejour. You will end up with a directory with a name like dejour-1.1.0. Inside that directory is a bin directory, containing a Linux/Mac script, clj as well as a couple of Windows executables. If you are running on Linux or a Mac, you can run clojure by running the clj script. If you are on windows you have a choice of clj.exe which will run clojure with a console or cljw.exe which will run clojure without a console.
 
 There is no step three.
 
@@ -46,9 +46,7 @@ The clj script and executable are designed to be as simple for beginners to use 
  
  * -- Treat everything that follows as a clojure argument
 
-Dejour is also location independant. It will run out of where every you decide to unpack it, no environment variables required. The only external dependancy that Dejour has is on Java: It assumes that there is a java command in your path, or that JAVA_HOME is set.
-
-Dejour will use the java program indicated by JAVA_HOME or from your path. If you have both, JAVA_HOME wins.
+Dejour is also location independant. It will run out of where every you decide to unpack it, no environment variables required. The only external dependancy that Dejour has is on Java: It assumes that there is a java command in your path, or that JAVA_HOME is set.  If you have both, JAVA_HOME wins.
 
 h2. Examples
 
