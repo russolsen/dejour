@@ -1,1 +1,0 @@
-java -classpath ../../build/dejour-1.1.0/cljlib/clojure.jar:../../build/dejour-1.1.0/cljlib/clojure-contrib.jar:../../build/dejour-1.1.0/cljlib/jline.jar:from_classpath jline.ConsoleRunner clojure.main
