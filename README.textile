@@ -51,9 +51,9 @@ Dejour is also location independant. It will run out of where every you decide t
 h2. Examples
 
 If you just want the clojure REPL (i.e. interactive shell), simply run the clj script (or clj.exe on Windows):
-.pre $ clj
-  Clojure 1.1.0
-  user=> 
+$ clj
+Clojure 1.1.0
+user=> 
 
 
 If you want to execute a file full of clojure code, call out the file on after clj:
