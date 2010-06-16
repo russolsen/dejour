@@ -44,7 +44,7 @@ The clj script and executable are designed to be very simple for beginners to us
 
  * -J java-option Pass the next argument directly to java.
  
- * -- Treat everything that follows as a clojure argument
+ * -- (That's two dashes) Treat everything that follows as a clojure argument
 
 Dejour is also location independant. It will run out of where every you decide to unpack it, no environment variables required. The only external dependancy that Dejour has is on Java: It assumes that there is a java command in your path, or that JAVA_HOME is set.  If you have both, JAVA_HOME wins.
 
