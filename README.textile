@@ -8,7 +8,7 @@ The Dejour project pulls all of this together in a single easy to get, easy to i
 
 h2. Installing Dejour
 
-Step one is to download the latest Dejour jar or zip from:
+Step one is to download the latest Dejour tar or zip from:
 
 http://github.com/russolsen/dejour/downloads
 
@@ -20,7 +20,7 @@ h2. Using the clj script
 
 If you run the script with no parameters, clj will bring up the interactive clojure 'interpreter': You can simply type in clojure code and immediately see the results. Alternatively, if you supply clj with the name of a clojure script, it will run that script.
 
-The clj script and executable are designed to be as simple for beginners to use as it can be, but it is capable of doing more elaborate things. Here are the arguments that clj understands:
+The clj script and executable are designed to be very simple for beginners to use, but they are also capable of doing more elaborate things. Here are the arguments that clj understands:
 
  * -debug Just print out the java command and exit.
 
@@ -50,7 +50,12 @@ Dejour is also location independant. It will run out of where every you decide t
 
 h2. Examples
 
-If you just want the clojure REPL (i.e. interactive shell), simply run the clj (or clj.exe on Windows).
+If you just want the clojure REPL (i.e. interactive shell), simply run the clj script (or clj.exe on Windows):
+
+  $ clj
+  Clojure 1.1.0
+  user=> 
+
 
 If you want to execute a file full of clojure code, call out the file on after clj:
 
