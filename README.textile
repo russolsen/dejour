@@ -1,26 +1,26 @@
-h2. Dejure
+h2. Dejour
 
-Dejure provides an easy, 'works out of the box' for the Clojure programming language. Clojure is a function LISP JVM hosted variant that is great for concurrent programming. You can find the clojure source and original downloads at http://clojure.org/. 
+Dejour provides an easy, 'works out of the box' experience for the Clojure programming language. Clojure is a function LISP JVM hosted variant that is great for concurrent programming. You can find the clojure source and original downloads at http://clojure.org/. 
 
-Unfortunately, while clojure.org provides the superb Clojure language as well as clojure-contrib, which is a set of useful libraries, there are a few things missing. The most important missing bit is a script that will run Clojure. Also missing is the very useful jline, which provides you with command editing when you are running the interactive clojure interpreter.
+Unfortunately, while clojure.org provides the superb Clojure language as well as clojure-contrib (a set of useful libraries) there are a few things missing. The most important missing bit is a script that will run Clojure. Also missing is the very useful jline, which provides you with command editing when you are running the interactive clojure interpreter or REPL.
 
-The Dejure project pulls all of this together in a single easy to get, easy to install download. Dejure currently works on Linux and Macs, with a windows version coming soon.
+The Dejour project pulls all of this together in a single easy to get, easy to install download. Dejour currently works on Linux and Macs, and windows.
 
-h2. Installing Dejure
+h2. Installing Dejour
 
-Installing Dejure is a very simple project: Just download the latest Dejure archive from:
+Step one is to download the latest Dejour jar or zip from:
 
 http://github.com/russolsen/dejour/downloads
 
-Then unpack it into the directory of your choice. You will end up with a directory with a name like dejure-1.1.0. Inside that directory is a bin directory, containing a script, clj. If you run the script with no parameters, clj will bring up the interactive clojure 'interpreter': You can simply type in clojure code and immediately see the results. Alternatively, if you supply clj with the name of a clojure script, it will run that script.
+Step two is to unpack Dejuour. You will end up with a directory with a name like dejour-1.1.0. Inside that directory is a bin directory, containing a Linux/Mac script, clj as well as a couple of Windows executables. If you are running on Linux or a Mac, you can run clojure by running the clj script. If you are on windows you have a choice of clj.exe which will run clojure with a console or cljw.exe which will run clojure without a console.
 
-h2. Examples
-
-Dejure also comes with some simple examples of Clojure code from my "Clojure, the least you need to know" talk. You will find these in the examples subdirectory.
+There is no step three.
 
 h2. Using the clj script
 
-The clj script is designed to be as simple for beginners to use as it can be, but it is capable of doing more elaborate things. Here are the arguments that clj understands:
+If you run the script with no parameters, clj will bring up the interactive clojure 'interpreter': You can simply type in clojure code and immediately see the results. Alternatively, if you supply clj with the name of a clojure script, it will run that script.
+
+The clj script and executable are designed to be as simple for beginners to use as it can be, but it is capable of doing more elaborate things. Here are the arguments that clj understands:
 
  * -debug Just print out the java command and exit.
 
@@ -46,12 +46,36 @@ The clj script is designed to be as simple for beginners to use as it can be, bu
  
  * -- Treat everything that follows as a clojure argument
 
-Dejure will use the java program indicated by JAVA_HOME or from your path. If you have both, JAVA_HOME wins.
+Dejour is also location independant. It will run out of where every you decide to unpack it, no environment variables required. The only external dependancy that Dejour has is on Java: It assumes that there is a java command in your path, or that JAVA_HOME is set.
+
+Dejour will use the java program indicated by JAVA_HOME or from your path. If you have both, JAVA_HOME wins.
+
+h2. Examples
+
+If you just want the clojure REPL (i.e. interactive shell), simply run the clj (or clj.exe on Windows).
+
+If you want to execute a file full of clojure code, call out the file on after clj:
+
+  clj my-clojure-code.clj
+
+If you want to pass arguments to your clojure script, just hang them on the end of the command:
+
+  clj my-clojure-code.clj some arguments
+
+If you need to pass a -D or -X argument to java, put it before the clojure file:
+
+  clj -Xmx500M -DFoo=bar  my-clojure-code.clj some arguments
+
+If you have other java VM arguments, you can pass them in via the -J option:
+
+  clj -J -d32
+
+Dejour also comes with some simple examples of Clojure code from my "Clojure, the least you need to know" talk. You will find these in the examples subdirectory.
 
 
 h2. Contributors
 
-Dejure was created by "Russ Olsen":http://github.com/russolsen and is, of course, based on Clojure, clojure-contrib and jline.  Much of the clj script was hamelessly stolen from the Jruby startup script,jruby.sh. Also borrowed some code from Mark Reid's clj script.
+Dejour was created by "Russ Olsen":http://github.com/russolsen and is, of course, based on Clojure, clojure-contrib and jline.  Much of the clj script was hamelessly stolen from the Jruby startup script,jruby.sh. Also borrowed some code from Mark Reid's clj script.
 
 
 See my website at "russolsen.com":http://www.russolsen.com

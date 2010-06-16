@@ -41,6 +41,8 @@ arg_check() {
 add_to_path() {
   if [ -z "$1" ]; then
     echo $2
+  elif [ -z "$2" ]; then
+    echo $1
   else
     echo $1$3$2
   fi
@@ -105,11 +107,9 @@ CP_DELIMITER=":"
 
 # Pick up all the jar files in dejour/lib
 
-LIB_DIR_CP=""
+LIB_DIR_CP="$CLOJURE_LIB"
 for jarfile in `find "$CLOJURE_LIB" -name "*.jar"`; do
-    if [ "$jarfile" != "$CLOJURE_JAR" ]; then
-        LIB_DIR_CP=`add_to_path "$USER_CP" "$jarfile" $CP_DELIMITER`
-    fi
+  LIB_DIR_CP=`add_to_path "$USER_CP" "$jarfile" $CP_DELIMITER`
 done
 
 # Process all the - flags that this script understands
@@ -221,10 +221,8 @@ else
 fi
 
 CLOJURE_CP="$CORE_CP"
-echo "clojure_cp: $CLOJURE_CP"
-if [ ! -z "$LIB_DIR_CP" ] ; then
-  CLOJURE_CP=`add_to_path "$CLOJURE_CP" "$LIB_DIR_CP" $CP_DELIMITER`
-fi
+
+CLOJURE_CP=`add_to_path "$CLOJURE_CP" "$LIB_DIR_CP" $CP_DELIMITER`
 
 CLOJURE_CP=`add_to_path "$CLOJURE_CP" "$USER_CP" $CP_DELIMITER`
 
