@@ -1,18 +1,18 @@
 h2. Dejour
 
-Dejour provides an easy, 'works out of the box' experience for the Clojure programming language. Clojure is a function LISP JVM hosted variant that is great for concurrent programming. You can find the clojure source and original downloads at http://clojure.org/. 
+Dejour provides an easy, _works out of the box_ experience for the Clojure programming language. Clojure is a JVM-hosted, functional, general-purpose LISP variant that is especially adept at concurrent programming. You can find the clojure source and original downloads at "http://clojure.org":http://clojure.org. 
 
-Unfortunately, while clojure.org provides the superb Clojure language as well as clojure-contrib (a set of useful libraries) there are a few things missing. The most important missing bit is a script that will run Clojure. Also missing is the very useful jline, which provides you with command editing when you are running the interactive clojure interpreter or REPL.
+Unfortunately, while clojure.org provides the superb Clojure language as well as clojure-contrib (a set of useful libraries) there are a few things missing. The most important missing bit is a script that will run Clojure. Also missing is the very useful "JLine":http://jline.sourceforge.net providing a more robust interactive clojure interpreter or REPL.
 
-The Dejour project pulls all of this together in a single easy to get, easy to install download. Dejour currently works on Linux and Macs, and windows.
+The Dejour project pulls all of this together in a single easy to get, easy to install download. Dejour currently works on Linux, Macs, and Windows.
 
 h2. Installing Dejour
 
-Step one is to download the latest Dejour tar or zip from:
+*Step one* is to download the latest Dejour tar or zip from:
 
-http://github.com/russolsen/dejour/downloads
+"http://github.com/russolsen/dejour/downloads":http://github.com/russolsen/dejour/downloads
 
-Step two is to unpack Dejour. You will end up with a directory with a name like dejour-1.1.0. Inside that directory is a bin directory, containing a Linux/Mac script, clj as well as a couple of Windows executables. If you are running on Linux or a Mac, you can run clojure by running the clj script. If you are on windows you have a choice of clj.exe which will run clojure with a console or cljw.exe which will run clojure without a console.
+*Step two* is to unpack Dejour. You will end up with a directory with a name like @dejour-1.1.0@. Inside that directory is a bin directory, containing a Linux/Mac script, clj as well as a couple of Windows executables. If you are running on Linux or a Mac, you can run clojure by running the clj script. If you are on windows you have a choice of clj.exe which will run clojure with a console or cljw.exe which will run clojure without a console.
 
 There is no step three.
 
@@ -22,62 +22,71 @@ If you run the script with no parameters, clj will bring up the interactive cloj
 
 The clj script and executable are designed to be very simple for beginners to use, but they are also capable of doing more elaborate things. Here are the arguments that clj understands:
 
- * -debug Just print out the java command and exit.
+ * @-debug@ Just print out the java command and exit.
 
- * -no-jline Don't use jline
+ * @-no-jline@ Don't use jline
 
- * -no-contrib Don't use clojure-contrib
+ * @-no-contrib@ Don't use clojure-contrib
 
- * -cp <jar or directory> Add the next argument to the classpath
+ * @-cp@ _<jar or directory>_ Add the next argument to the classpath
 
- * -classpath <jar or directory> Add the next argument to the classpath
+ * @-classpath@ _<jar or directory>_ Add the next argument to the classpath
 
- * -Dname=value Define the given Java system property, passed directly to java.
+ * @-Dname=value@ Define the given Java system property, passed directly to java.
 
- * -Xjava-option Passed directly to Java
+ * @-Xjava-option@ Passed directly to Java
 
- * -client Use the java client VM
+ * @-client@ Use the java client VM
 
- * -server Use the java server VM
+ * @-server@ Use the java server VM
 
- * -hotspot Turn on java hotspot
+ * @-hotspot@ Turn on java hotspot
 
- * -J java-option Pass the next argument directly to java.
+ * @-J@ java-option Pass the next argument directly to java.
  
- * -- (That's two dashes) Treat everything that follows as a clojure argument
+ * @--@ (That's two dashes) Treat everything that follows as a clojure argument
 
-Dejour is also location independant. It will run out of where every you decide to unpack it, no environment variables required. The only external dependancy that Dejour has is on Java: It assumes that there is a java command in your path, or that JAVA_HOME is set.  If you have both, JAVA_HOME wins.
+Dejour is also location independant. It will run out of wherever you decide to unpack it -- no environment variables required. The only external dependancy that Dejour has is on Java: It assumes that there is a java command in your path, or that JAVA_HOME is set.  If you have both, JAVA_HOME wins.
 
 h2. Examples
 
 If you just want the clojure REPL (i.e. interactive shell), simply run the clj script (or clj.exe on Windows):
-$ clj
-Clojure 1.1.0
-user=> 
 
+<pre><code>
+    $ clj
+    Clojure 1.1.0
+    user=> 
+</code></pre>
 
 If you want to execute a file full of clojure code, call out the file on after clj:
 
+<pre><code>
   clj my-clojure-code.clj
+</code></pre>
 
 If you want to pass arguments to your clojure script, just hang them on the end of the command:
 
+<pre><code>
   clj my-clojure-code.clj some arguments
+</code></pre>
 
 If you need to pass a -D or -X argument to java, put it before the clojure file:
 
+<pre><code>
   clj -Xmx500M -DFoo=bar  my-clojure-code.clj some arguments
+</code></pre>
 
 If you have other java VM arguments, you can pass them in via the -J option:
 
+<pre><code>
   clj -J -d32
+</code></pre>
 
 Dejour also comes with some simple examples of Clojure code from my "Clojure, the least you need to know" talk. You will find these in the examples subdirectory.
 
-
 h2. Contributors
 
-Dejour was created by "Russ Olsen":http://github.com/russolsen and is, of course, based on Clojure, clojure-contrib and jline.  Much of the clj script was hamelessly stolen from the Jruby startup script,jruby.sh. Also borrowed some code from Mark Reid's clj script.
+Dejour was created by "Russ Olsen":http://github.com/russolsen and is, of course, based on Clojure, clojure-contrib and JLine.  Much of the clj script was hamelessly stolen from the Jruby startup script, jruby.sh. Also borrowed some code from Mark Reid's clj script.
 
 
 See my website at "russolsen.com":http://www.russolsen.com
@@ -85,4 +94,3 @@ See my website at "russolsen.com":http://www.russolsen.com
 h2. License
 
 Copyright (c) 2010 Russ Olsen and released under the Apache 2.0 license.
-
