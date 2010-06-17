@@ -29,7 +29,7 @@ If you just want the clojure REPL (i.e. interactive shell), simply run the clj s
 
 </code></pre>
 
-If you want to execute a file full of clojure code, call out the file on after clj:
+If you want to execute a file full of clojure code, call out the file after clj:
 
 <pre><code>
   clj my-clojure-code.clj
