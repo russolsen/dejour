@@ -74,7 +74,14 @@ int main(int argc, char **argv) {
     char command_line[MAX_CMD_LINE_LEN];
     strcat( command_line, "" );
 
+    // First the java command itself.
+
     add_list_with_quotes( command_line, get_java_cmd(), " " );
+
+    // Then the -DCLOJURE_HOME=... paramter
+    strcat( command_line, " -DCLOJURE_HOME=\"" );
+    strcat( command_line, get_base_dir() );
+    strcat( command_line, "\"" );
 
     add_list( command_line, get_vmargs(), " " );
     add_list( command_line, "-cp ", " ");

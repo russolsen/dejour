@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # -----------------------------------------------------------------------------
 # clj  - Start Script for the Clojure interperter
 # Shamelessly stolen from the Jruby startup script,
@@ -74,13 +74,12 @@ while [ -h "$PRG" ] ; do
   fi
 done
 
-CLOJURE_HOME_1=`dirname "$PRG"`           # the ./bin dir
-if [ "$CLOJURE_HOME_1" = '.' ] ; then
-  cwd=`pwd`
-  CLOJURE_HOME=`dirname $cwd` #
-else
-  CLOJURE_HOME=`dirname "$CLOJURE_HOME_1"`  # the . dir
-fi
+CLOJURE_BIN=`dirname "$PRG"`           # bin dir, relative
+CLOJURE_BIN=`(cd "$CLOJURE_BIN"; pwd)` # bin dir, absolute path
+echo $CLOJURE_BIN
+
+CLOJURE_HOME=`dirname "$CLOJURE_BIN"`
+echo $CLOJURE_HOME
 
 # Determine what we are going to use for java,
 # either from JAVA_HOME or from the path
@@ -117,8 +116,9 @@ done
 # should be passed to clojure itself
 
 DEBUG_CMD=""
-JAVA_ARGS=""
 CLOJURE_ARGS=""
+declare -a JAVA_ARGS
+
 
 USE_JLINE=true
 USE_CONTRIB=true
@@ -148,23 +148,23 @@ do
     ;;
 
     -D*)
-       JAVA_ARGS="$JAVA_ARGS $1"
+       JAVA_ARGS=("${JAVA_ARGS[@]}" "$1")
     ;;
 
     -X*)
-       JAVA_ARGS="$JAVA_ARGS $1"
+       JAVA_ARGS=("${JAVA_ARGS[@]}" "$1")
     ;;
 
     -client)
-       JAVA_ARGS="$JAVA_ARGS $1"
+       JAVA_ARGS=("${JAVA_ARGS[@]}" "$1")
     ;;
 
     -server)
-       JAVA_ARGS="$JAVA_ARGS $1"
+       JAVA_ARGS=("${JAVA_ARGS[@]}" "$1")
     ;;
 
     -hotspot)
-       JAVA_ARGS="$JAVA_ARGS $1"
+       JAVA_ARGS=("${JAVA_ARGS[@]}" "$1")
     ;;
 
     -no-jline)
@@ -184,7 +184,7 @@ do
     -J)
        arg_check "$1" $#
        shift
-       JAVA_ARGS="$JAVA_ARGS $1"
+       JAVA_ARGS=("${JAVA_ARGS[@]}" "$1")
     ;;
 
     --)
@@ -226,8 +226,9 @@ CLOJURE_CP=`add_to_path "$CLOJURE_CP" "$LIB_DIR_CP" $CP_DELIMITER`
 
 CLOJURE_CP=`add_to_path "$CLOJURE_CP" "$USER_CP" $CP_DELIMITER`
 
+$DEBUG_CMD $JAVA_CMD -DCLOJURE_HOME="$CLOJURE_HOME" \
+  -classpath "$CLOJURE_CP" "${JAVA_ARGS[@]}" $CLOJURE_JLINE_CLASS $CLOJURE_MAIN_CLASS "$@"
 
-$DEBUG_CMD $JAVA_CMD -classpath $CLOJURE_CP $JAVA_ARGS $CLOJURE_JLINE_CLASS $CLOJURE_MAIN_CLASS "$@"
 
 
 
