@@ -6,7 +6,7 @@
   <property name="clojure-contrib-version" value="1.1.0" />
   <property name="jline-version" value="0.9.94" />
 
-  <property name="dejour-version" value="${clojure-version}a" />
+  <property name="dejour-version" value="${clojure-version}b" />
 
   <property name="staging-dir" value="${basedir}/build/dejour-${dejour-version}"/>
   <property name="test-dir" value="${basedir}/test"/>

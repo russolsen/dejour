@@ -91,7 +91,13 @@ The clj script and executable are designed to be very simple for beginners to us
 
 Dejour is also location independant. It will run out of wherever you decide to unpack it -- no environment variables required. The only external dependancy that Dejour has is on Java: It assumes that there is a java command in your path, or that JAVA_HOME is set.  If you have both, JAVA_HOME wins.
 
-Finally, the clj script has some support for Cygwin, but I would welcome feedback from any Cygwin users out there.
+h2. ToDo
+
+"Art is never finished, only abandoned." I don't know if dejour is art, but it certainly ain't finished. Here are some of the things still left undone:
+
+ * Include a GUI based REPL, possibly http://github.com/alandipert/clj-swingrepl
+
+ * There is some support in the clj script for Cygwin, but I would welcome feedback from any Cygwin users out there
 
 h2. Contributors
 
