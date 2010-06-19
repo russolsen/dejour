@@ -76,10 +76,8 @@ done
 
 CLOJURE_BIN=`dirname "$PRG"`           # bin dir, relative
 CLOJURE_BIN=`(cd "$CLOJURE_BIN"; pwd)` # bin dir, absolute path
-echo $CLOJURE_BIN
 
 CLOJURE_HOME=`dirname "$CLOJURE_BIN"`
-echo $CLOJURE_HOME
 
 # Determine what we are going to use for java,
 # either from JAVA_HOME or from the path
@@ -225,6 +223,12 @@ CLOJURE_CP="$CORE_CP"
 CLOJURE_CP=`add_to_path "$CLOJURE_CP" "$LIB_DIR_CP" $CP_DELIMITER`
 
 CLOJURE_CP=`add_to_path "$CLOJURE_CP" "$USER_CP" $CP_DELIMITER`
+
+if $cygwin; then
+  CLOJURE_HOME=`cygpath --windows $CLOJURE_HOME`
+  JAVA_CMD=`cygpath --windows $JAVA_CMD`
+  CLOJURE_CP=`cygpath -wp $CLOJURE_CP`
+fi
 
 $DEBUG_CMD $JAVA_CMD -DCLOJURE_HOME="$CLOJURE_HOME" \
   -classpath "$CLOJURE_CP" "${JAVA_ARGS[@]}" $CLOJURE_JLINE_CLASS $CLOJURE_MAIN_CLASS "$@"
