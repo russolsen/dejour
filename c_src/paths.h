@@ -16,7 +16,6 @@ extern char *get_base_dir();
 extern char *get_lib_dir();
 extern char *get_jline_jar();
 extern char *get_clojure_jar();
-extern char *get_clojure_contrib_jar();
 extern char *get_java_cmd();
 
 

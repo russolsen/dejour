@@ -28,8 +28,6 @@ extern char *get_jline_main();
 
 extern int get_use_jline();
 
-extern int get_use_contrib();
-
 extern char *get_vmargs();
 
 extern void process_args( int argc, char** argv );

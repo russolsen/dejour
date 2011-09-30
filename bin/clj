@@ -7,7 +7,6 @@
 # Options:
 # -debug Just print out the java cmd and exit. 
 # -no-jline Don't use jline
-# -no-contrib Don't use clojure-contrib
 # -cp <jar or directory> Add the next argument to the classpath
 # -classpath <jar or directory> Add the next argument to the classpath
 # -Dname=value Define the given Java system property, passed directly to java.
@@ -93,12 +92,10 @@ fi
 
 # Figure out where all the key jar files are
 
-CLOJURE_CORE_LIB=$CLOJURE_HOME/cljlib
 CLOJURE_LIB=$CLOJURE_HOME/lib
 
-CLOJURE_JAR=$CLOJURE_CORE_LIB/clojure.jar
-CLOJURE_CONTRIB_JAR=$CLOJURE_CORE_LIB/clojure-contrib.jar
-JLINE_JAR=$CLOJURE_CORE_LIB/jline.jar
+CLOJURE_JAR=$CLOJURE_LIB/clojure.jar
+JLINE_JAR=$CLOJURE_LIB/jline.jar
 
 CP_DELIMITER=":"
 
@@ -119,7 +116,6 @@ declare -a JAVA_ARGS
 
 
 USE_JLINE=true
-USE_CONTRIB=true
 CLOJURE_MAIN_CLASS=clojure.main
 CLOJURE_JLINE_CLASS=jline.ConsoleRunner
 
@@ -169,10 +165,6 @@ do
        USE_JLINE=false
     ;;
 
-    -no-contrib)
-       USE_CONTRIB=false
-    ;;
-
     -repl-class)
        arg_check "$1" $#
        shift
@@ -205,11 +197,7 @@ if [ -z "$USER_CP" ]; then
   USER_CP="$CLASSPATH"
 fi
 
-# Do we want to use clojure contrib?
-
-if $USE_CONTRIB; then
-  CORE_CP=`add_to_path "$CORE_CP" "$CLOJURE_CONTRIB_JAR" $CP_DELIMITER`
-fi
+# Do we want to use clojure jline?
 
 if $USE_JLINE; then
   CORE_CP=`add_to_path "$CORE_CP" "$JLINE_JAR" $CP_DELIMITER`

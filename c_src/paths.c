@@ -7,17 +7,14 @@
 
 static char *base_dir;
 static char *lib_dir;
-static char *clj_lib_dir;
 static char *jline_jar;
 static char *clojure_jar;
-static char *clojure_contrib_jar;
 static char *java_cmd;
 
 char *get_base_dir() { return base_dir; }
 char *get_lib_dir() { return lib_dir; }
 char *get_jline_jar() { return jline_jar; }
 char *get_clojure_jar() { return clojure_jar; }
-char *get_clojure_contrib_jar() { return clojure_contrib_jar; }
 char *get_java_cmd() { return java_cmd; }
 
 /**
@@ -60,29 +57,11 @@ static char *compute_lib_dir() {
 }
 
 /**
- * Return the path to the cljlib directory.
- */
-static char *compute_clj_lib_dir() {
-    char* path = compute_base_dir();
-    strcat( path, "\\cljlib");
-    return path;
-}
-
-/**
  * Get the path to the clojure.jar file.
  */
 static char *compute_clojure_jar( ) {
-    char* path = compute_clj_lib_dir();
+    char* path = compute_lib_dir();
     strcat( path, "\\clojure.jar");
-    return path;
-}
-
-/**
- * Get the path to the clojure-contrib.jar file.
- */
-static char *compute_clojure_contrib_jar( ) {
-    char* path = compute_clj_lib_dir();
-    strcat( path, "\\clojure-contrib.jar");
     return path;
 }
 
@@ -90,7 +69,7 @@ static char *compute_clojure_contrib_jar( ) {
  * Get the path to the jline.jar file.
  */
 static char *compute_jline_jar( ) {
-    char* path = compute_clj_lib_dir();
+    char* path = compute_lib_dir();
     strcat( path, "\\jline.jar");
     return path;
 }
@@ -121,10 +100,8 @@ static char *compute_java_cmd( ) {
 void initPaths() {
     base_dir = compute_base_dir();
     lib_dir = compute_lib_dir();
-    clj_lib_dir = compute_clj_lib_dir();
     jline_jar = compute_jline_jar();
     clojure_jar = compute_clojure_jar();
-    clojure_contrib_jar = compute_clojure_contrib_jar();
     java_cmd = compute_java_cmd();
 }
 

@@ -8,7 +8,6 @@ static char clojureMain[1000];
 static char jlineMain[1000];
 static int debug = FALSE;
 
-static int use_contrib = TRUE;
 static int use_jline = TRUE;
 
 static void add_vm_arg(char* arg) {
@@ -34,13 +33,6 @@ static void arg_check(char *argument_name, int i, int argc) {
  */
 int get_debug() {
     return debug;
-}
-
-/**
- * Return true if we should use the contrib jar.
- */
-int get_use_contrib() {
-    return use_contrib;
 }
 
 /**
@@ -117,10 +109,6 @@ void process_args(int argc, char** argv) {
                 (strcmp(arg, "-cp") == 0)) {
             arg_check(arg, ++i, argc);
             add_user_classpath(argv[i]);
-        }
-
-        else if (strcmp(arg, "-no-contrib") == 0) {
-            use_contrib = FALSE;
         }
 
         else if (strcmp(arg, "-no-jline") == 0) {

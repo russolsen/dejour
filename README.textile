@@ -69,8 +69,6 @@ The clj script and executable are designed to be very simple for beginners to us
  
  * @-no-jline@ Don't use jline
  
- * @-no-contrib@ Don't use clojure-contrib
-
  * @-cp <jar or directory>@ Add the next argument to the classpath
 
  * @-classpath <jar or directory>@ Add the next argument to the classpath

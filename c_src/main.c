@@ -45,10 +45,6 @@ int main(int argc, char **argv) {
     char classpath[MAX_CMD_LINE_LEN];
     strcpy( classpath, get_clojure_jar() );
 
-    if ( get_use_contrib() ) {
-        add_to_path( classpath, get_clojure_contrib_jar() );
-    }
-
     if ( get_use_jline() ) {
         add_to_path( classpath, get_jline_jar() );
     }
