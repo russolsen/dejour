@@ -1,0 +1,41 @@
+<ivy-module version="2.0">
+  <info organisation="org.apache" module="dejour"/>
+
+  <configurations>
+    <conf name="minimal-1.2c" 
+          description="Just clojure 1.2, no contrib libraries"/>
+
+    <conf name="complete-1.2c" 
+          extends="minimal-1.2c"
+          description="Clojure 1.2, plus contrib libraries"/>
+
+    <conf name="minimal-1.3c" 
+          description="Just clojure, no contrib libraries"/>
+
+    <conf name="complete-1.3c"
+          extends="minimal-1.3c"
+          description="Clojure plus all the contribs"/>
+
+  </configurations>
+  
+  <dependencies>
+    <dependency org="jline" name="jline" rev="0.9.92" 
+                conf="minimal-1.3c->default; minimal-1.2c->default"/>
+
+    <dependency org="org.clojure" name="clojure" rev="1.2.1" 
+                conf="minimal-1.2c->default"/>
+
+    <dependency org="org.clojure" name="clojure-contrib" rev="1.2.0" 
+                conf="complete-1.2c->default"/>
+
+    <dependency org="org.clojure" name="clojure" rev="1.3.0" 
+                conf="minimal-1.3c->default"/>
+
+    <dependency org="org.clojure" name="java.classpath" rev="0.1.0"
+                conf="complete-1.3c->default"/>
+
+    <dependency org="org.clojure" name="tools.nrepl" rev="0.0.5"
+                conf="complete-1.3c->default"/>
+
+  </dependencies>
+</ivy-module>
