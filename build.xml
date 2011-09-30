@@ -53,8 +53,19 @@
       
 
       <zip destfile="build/@{name}.zip"
-           basedir="build/@{name}" 
-           includes="**/*"/>
+           basedir="build/" 
+           includes="@{name}/**/*"/>
+
+
+      <tar destfile="build/@{name}.tar">
+        <tarfileset dir="build" filemode="755">
+          <include name="@{name}/bin/**/*"/>
+        </tarfileset>
+        <tarfileset dir="build">
+          <include name="@{name}/**/*"/>
+          <exclude name="@{name}/bin/**/*"/>
+        </tarfileset>
+      </tar>
     </sequential>
 
   </macrodef>
