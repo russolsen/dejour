@@ -28,9 +28,9 @@
 
 ; core jar files and main classes
 
-(output-matches? ["clj" "-debug"] #"cljlib.clojure\.jar" "Contains clojure.jar")
-(output-matches? ["clj" "-debug"] #"cljlib.clojure-contrib\.jar" "Contains contrib")
-(output-matches? ["clj" "-debug"] #"cljlib.jline\.jar" "Contains jline.jar")
+(output-matches? ["clj" "-debug"] #"lib.clojure\.jar" "Contains clojure.jar")
+(output-matches? ["clj" "-debug"] #"lib.clojure-contrib\.jar" "Contains contrib")
+(output-matches? ["clj" "-debug"] #"lib.jline\.jar" "Contains jline.jar")
 (output-matches? ["clj" "-debug"] #"jline\.ConsoleRunner" "Contains console runner")
 (output-matches? ["clj" "-debug"] #"clojure\.main$" "contains clojure main")
 

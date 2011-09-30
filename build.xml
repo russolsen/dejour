@@ -28,9 +28,8 @@
   </target>
 
   <macrodef name="create-dejour-release">
-    <attribute name="release-name"/>
     <attribute name="ivy-conf-name"/>
-    <attribute name="name" default="@{release-name}-@{ivy-conf-name}"/>
+    <attribute name="name" default="dejour-@{ivy-conf-name}"/>
 
     <sequential>
       <mkdir dir="build/@{name}/lib"/>
@@ -38,6 +37,12 @@
         <fileset dir="${basedir}">
           <include  name="bin/**/*"/>
           <include  name="examples/**/*"/>
+        </fileset>
+      </copy>
+
+      <copy todir="build/@{name}/syslib" flatten="true">
+        <fileset dir="${basedir}">
+          <include  name="downloads/jline/jline*.jar"/>
         </fileset>
       </copy>
 
@@ -65,35 +70,40 @@
           <include name="@{name}/**/*"/>
           <exclude name="@{name}/bin/**/*"/>
         </tarfileset>
-      </tar>
-    </sequential>
+      </tar> </sequential>
 
   </macrodef>
 
   <target name="all" depends="init" >
-    <create-dejour-release release-name="dejour" 
-                           ivy-conf-name="minimal-1.2.1c"/>
+    <create-dejour-release ivy-conf-name="minimal-1.2.1c"/>
 
-    <create-dejour-release release-name="dejour" 
-                           ivy-conf-name="complete-1.2.1c"/>
+    <create-dejour-release ivy-conf-name="complete-1.2.1c"/>
 
-    <create-dejour-release release-name="dejour" 
-                           ivy-conf-name="minimal-1.3.0c"/>
+    <create-dejour-release ivy-conf-name="minimal-1.3.0c"/>
 
-    <create-dejour-release release-name="dejour" 
-                           ivy-conf-name="complete-1.3.0c"/>
+    <create-dejour-release ivy-conf-name="complete-1.3.0c"/>
   </target>
 
+  <macrodef name="test-dejour-release">
+    <attribute name="ivy-conf-name"/>
+    <attribute name="name" default="dejour-@{ivy-conf-name}"/>
+
+    <sequential>
+      <java fork="true" failonerror="true" classname="clojure.main">
+        <env key="PATH" value="build/@{name}/bin${path.separator}${env.PATH}"/>
+        <classpath>
+          <fileset dir="build/@{name}/lib">
+             <include name="*.jar"/>
+          </fileset>
+        </classpath>
+        <arg value="${basedir}/test/dejour-tests.clj"/>
+      </java>
+    </sequential>
+  </macrodef>
+
+
   <target name="test">
-    <java fork="true" failonerror="true" classname="clojure.main">
-      <env key="PATH" value="${build-dir}/bin${path.separator}${env.PATH}"/>
-      <classpath>
-        <fileset dir="${build-dir}/cljlib">
-           <include name="*.jar"/>
-        </fileset>
-      </classpath>
-      <arg value="${test-dir}/dejour-tests.clj"/>
-    </java>
+    <test-dejour-release ivy-conf-name="complete-1.2.1c"/>
   </target>
 
   <target name="clean">

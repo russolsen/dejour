@@ -2,6 +2,9 @@
   <info organisation="org.apache" module="dejour"/>
 
   <configurations>
+    <conf name="jline" 
+          description="Just just jline"/>
+
     <conf name="minimal-1.2.1c" 
           description="Just clojure 1.2, no contrib libraries"/>
 
@@ -20,7 +23,7 @@
   
   <dependencies>
     <dependency org="jline" name="jline" rev="0.9.92" 
-                conf="minimal-1.3.0c->default; minimal-1.2.1c->default"/>
+                conf="jline->default"/>
 
     <dependency org="org.clojure" name="clojure" rev="1.2.1" 
                 conf="minimal-1.2.1c->default"/>

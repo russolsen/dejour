@@ -93,17 +93,18 @@ fi
 # Figure out where all the key jar files are
 
 CLOJURE_LIB=$CLOJURE_HOME/lib
+CLOJURE_SYS_LIB=$CLOJURE_HOME/syslib
 
-CLOJURE_JAR=$CLOJURE_LIB/clojure.jar
-JLINE_JAR=$CLOJURE_LIB/jline.jar
+JLINE_JAR=$CLOJURE_SYS_LIB/jline*.jar
 
 CP_DELIMITER=":"
 
 # Pick up all the jar files in dejour/lib
 
-LIB_DIR_CP="$CLOJURE_LIB"
+LIB_DIR_CP=""
+
 for jarfile in `find "$CLOJURE_LIB" -name "*.jar"`; do
-  LIB_DIR_CP=`add_to_path "$USER_CP" "$jarfile" $CP_DELIMITER`
+  LIB_DIR_CP=`add_to_path "$LIB_DIR_CP" "$jarfile" $CP_DELIMITER`
 done
 
 # Process all the - flags that this script understands
@@ -120,7 +121,7 @@ CLOJURE_MAIN_CLASS=clojure.main
 CLOJURE_JLINE_CLASS=jline.ConsoleRunner
 
 USER_CP=""
-CORE_CP="$CLOJURE_JAR"
+CORE_CP=""
 
 while [ $# -gt 0 ]
 do
