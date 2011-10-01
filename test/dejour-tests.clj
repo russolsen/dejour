@@ -17,14 +17,16 @@
       (rest cmd))))
 
 (defn output-matches? [cmd re msg]
-  (is
-    (re-seq re (run cmd))
-    msg))
+  (let [ output (run cmd) ]
+    (is
+      (re-seq re output)
+      msg)))
 
 (defn output-doesnt-match? [cmd re msg]
-  (is
-    (not (re-seq re (run cmd)))
-    msg))
+  (let [ output (run cmd) ]
+    (is
+      (not (re-seq re output))
+      msg)))
 
 ; core jar files and main classes
 
@@ -48,10 +50,6 @@
 
 (output-doesnt-match? ["clj" "-debug" "-no-jline"] #"jline.jar" "no jline, no jar")
 (output-doesnt-match? ["clj" "-debug" "-no-jline"] #"jline.ConsoleRunner" "no jline no class")
-
-; no contrib
-
-(output-doesnt-match? ["clj" "-debug" "-no-contrib"] #"clojure-contrib.jar" "no contrib")
 
 ; -classpath and -cp
 

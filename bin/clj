@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 # -----------------------------------------------------------------------------
 # clj  - Start Script for the Clojure interperter
 # Shamelessly stolen from the Jruby startup script,
@@ -7,6 +7,7 @@
 # Options:
 # -debug Just print out the java cmd and exit. 
 # -no-jline Don't use jline
+# -rlwrap Turns off jline and tries to use rlwrap
 # -cp <jar or directory> Add the next argument to the classpath
 # -classpath <jar or directory> Add the next argument to the classpath
 # -Dname=value Define the given Java system property, passed directly to java.
@@ -23,6 +24,14 @@
 #   clj my_clojure_file.clj -first_arg -second_arg
 #
 # Will run clojure_file.clj and pass the two args to it.
+#
+# Environment variables:
+#
+#    JAVA_HOME - specifies where Java lives, but not required: If JAVA_HOME
+#    is not set, clj will assume that the java command is on the PATH
+#
+#    CLJ_USE_RLWRAP - has the same effect as the -rlwrap flag: Turns jline off
+#    and tries to use rlwrap
 # 
 # -----------------------------------------------------------------------------
 
@@ -115,8 +124,14 @@ DEBUG_CMD=""
 CLOJURE_ARGS=""
 declare -a JAVA_ARGS
 
+if [ -z "$CLJ_USE_RLWRAP" ]; then
+  RLWRAP_CMD=""
+  USE_JLINE=true
+else
+  RLWRAP_CMD=rlwrap
+  USE_JLINE=false
+fi
 
-USE_JLINE=true
 CLOJURE_MAIN_CLASS=clojure.main
 CLOJURE_JLINE_CLASS=jline.ConsoleRunner
 
@@ -164,6 +179,11 @@ do
 
     -no-jline)
        USE_JLINE=false
+    ;;
+
+    -rlwrap)
+       USE_JLINE=false
+       RLWRAP_CMD=rlwrap
     ;;
 
     -repl-class)
@@ -219,7 +239,7 @@ if $cygwin; then
   CLOJURE_CP=`cygpath -wp $CLOJURE_CP`
 fi
 
-$DEBUG_CMD $JAVA_CMD -DCLOJURE_HOME="$CLOJURE_HOME" \
+$DEBUG_CMD $RLWRAP_CMD $JAVA_CMD -DCLOJURE_HOME="$CLOJURE_HOME" \
   -classpath "$CLOJURE_CP" "${JAVA_ARGS[@]}" $CLOJURE_JLINE_CLASS $CLOJURE_MAIN_CLASS "$@"
 
 
