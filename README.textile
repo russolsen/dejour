@@ -82,6 +82,8 @@ The clj script and executable are designed to be very simple for beginners to us
 
  * @-no-jline@ Don't use jline
 
+ * @-rlwrap@ Use rlwrap command instead of jline. Assumes that rlwrap is on your path.
+
  * @-cp <jar or directory>@ Add the next argument to the classpath
 
  * @-classpath <jar or directory>@ Add the next argument to the classpath
@@ -112,7 +114,7 @@ h2. ToDo
 
 h2. Contributors
 
-Dejour was created by "Russ Olsen":http://github.com/russolsen and is, of course, based on Clojure, clojure-contrib and JLine.  Much of the clj script was hamelessly stolen from the Jruby startup script, jruby.sh. Also borrowed some code from Mark Reid's clj script. Thanks to Fogus for some help with the README file.
+Dejour was created by "Russ Olsen":http://github.com/russolsen and is, of course, based on Clojure, clojure-contrib and JLine.  Much of the clj script was inspired by the Jruby startup script, jruby.sh. Also inspired by Mark Reid's clj script. Thanks to Fogus for some help with the README file. Thanks to Colin Jones for pitching in.
 
 
 See my website at "russolsen.com":http://www.russolsen.com
