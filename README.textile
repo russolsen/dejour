@@ -1,6 +1,6 @@
 h2. Dejour
 
-Dejour provides an easy, _works out of the box_ experience for the Clojure programming language. Clojure is a JVM-hosted, functional, general-purpose LISP variant that is especially adept at concurrent programming. You can find the clojure source and original downloads at "http://clojure.org":http://clojure.org. 
+Dejour provides an easy, _works out of the box_ experience for the Clojure programming language. Clojure is a JVM-hosted, functional, general-purpose LISP variant that is especially adept at concurrent programming. You can find the clojure source and original downloads at "http://clojure.org":http://clojure.org.
 
 Unfortunately, while clojure.org provides the superb Clojure language as well as clojure-contrib (a set of useful libraries) there are a few things missing. The most important missing bit is a script that will run Clojure. Also missing is the very useful "JLine":http://jline.sourceforge.net providing a more robust interactive clojure interpreter or REPL.
 
@@ -14,7 +14,20 @@ h2. Installing Dejour
 
 *Step two* is to unpack Dejour. You will end up with a directory with a name like @dejour-1.1.0@. Inside that directory is a bin directory, containing a Linux/Mac script, clj as well as a couple of Windows executables. If you are running on Linux or a Mac, you can run clojure by running the clj script. If you are on windows you have a choice of clj.exe which will run clojure with a console or cljw.exe which will run clojure without a console.
 
+*nix example (paths will vary):
+<pre><code>
+    $ cd ~/lib
+    $ tar xf ~/Downloads/dejour-complete-1.3.0c.tar
+
+</code></pre>
+
 *Step three* is probably to put the dejour @bin@ directory on your your path.
+
+*nix example (paths will vary):
+<pre><code>
+    $ export PATH=$PATH:~/lib/dejour-complete-1.3.0c/bin
+
+</code></pre>
 
 *Step four* There is no step four.
 
@@ -61,14 +74,14 @@ Dejour also comes with some simple examples of Clojure code from my "Clojure, th
 
 h2. Using the clj script
 
-If you run the script with no parameters, clj will bring up the interactive clojure 'interpreter': You can simply type in clojure code and immediately see the results. Alternatively, if you supply clj with the name of a clojure script, it will run that script. 
+If you run the script with no parameters, clj will bring up the interactive clojure 'interpreter': You can simply type in clojure code and immediately see the results. Alternatively, if you supply clj with the name of a clojure script, it will run that script.
 
 The clj script and executable are designed to be very simple for beginners to use, but they are also capable of doing more elaborate things. Here are the arguments that clj understands:
 
  * @-debug@ Just print out the java command and exit.
- 
+
  * @-no-jline@ Don't use jline
- 
+
  * @-cp <jar or directory>@ Add the next argument to the classpath
 
  * @-classpath <jar or directory>@ Add the next argument to the classpath
