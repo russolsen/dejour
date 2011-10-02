@@ -8,6 +8,7 @@
 # -debug Just print out the java cmd and exit. 
 # -no-jline Don't use jline
 # -rlwrap Turns off jline and tries to use rlwrap
+# -rlwrap-cmd Sets the rlwrap command and any options
 # -cp <jar or directory> Add the next argument to the classpath
 # -classpath <jar or directory> Add the next argument to the classpath
 # -Dname=value Define the given Java system property, passed directly to java.
@@ -33,6 +34,9 @@
 #    CLJ_USE_RLWRAP - has the same effect as the -rlwrap flag: Turns jline off
 #    and tries to use rlwrap
 # 
+#    CLJ_RLWRAP_CMD - has the same effect as the -rlwrap-cmd options
+#    and tries to use rlwrap
+# 
 # -----------------------------------------------------------------------------
 
 # $1 is the argument name, and $2 is the number of arguments left.
@@ -55,6 +59,10 @@ add_to_path() {
     echo $1$3$2
   fi
 } 
+
+rlwrap_command() {
+  echo ${CLJ_RLWRAP_CMD:=rlwrap}
+}
 
 cygwin=false
 
@@ -128,7 +136,7 @@ if [ -z "$CLJ_USE_RLWRAP" ]; then
   RLWRAP_CMD=""
   USE_JLINE=true
 else
-  RLWRAP_CMD=rlwrap
+  RLWRAP_CMD=`rlwrap_command`
   USE_JLINE=false
 fi
 
@@ -183,7 +191,14 @@ do
 
     -rlwrap)
        USE_JLINE=false
-       RLWRAP_CMD=rlwrap
+       RLWRAP_CMD=`rlwrap_command`
+    ;;
+
+    -rlwrap-cmd)
+       arg_check "$1" $#
+       shift
+       CLJ_RLWRAP_CMD="$1"
+       RLWRAP_CMD=`rlwrap_command`
     ;;
 
     -repl-class)
