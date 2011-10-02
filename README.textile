@@ -66,7 +66,7 @@ If you need to pass a -D or -X argument to java, put it before the clojure file:
 If you have other java VM arguments, you can pass them in via the -J option:
 
 <pre><code>
-  clj -J -d32
+  clj -J -d32 my-clojure-script.clj arg1 arg2
 
 </code></pre>
 
@@ -83,6 +83,8 @@ The clj script and executable are designed to be very simple for beginners to us
  * @-no-jline@ Don't use jline
 
  * @-rlwrap@ Use rlwrap command instead of jline. Assumes that rlwrap is on your path.
+
+ * @-rlwrap-cmd@ Specify the rlwrap command (and any parameters) in the next arg
 
  * @-cp <jar or directory>@ Add the next argument to the classpath
 
@@ -103,6 +105,8 @@ The clj script and executable are designed to be very simple for beginners to us
  * @--@ (That's two dashes) Treat everything that follows as a clojure argument
 
 Dejour is also location independant. It will run out of wherever you decide to unpack it -- no environment variables required. The only external dependancy that Dejour has is on Java: It assumes that there is a java command in your path, or that JAVA_HOME is set.  If you have both, JAVA_HOME wins.
+
+Dejour also pays attention to two rlwrap related environment variables (if you don't know what rlwrap is then you don't need to worry about this). The two variables are: CLJ_USE_RLWRAP which turns on rlwrap support by default and CLJ_RLWRAP_CMD which specifies and alternative rlwrap command (other than the default 'rlwrap') and any rlwrap arguments.
 
 h2. ToDo
 
