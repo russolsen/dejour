@@ -125,4 +125,4 @@ See my website at "russolsen.com":http://www.russolsen.com
 
 h2. License
 
-Copyright (c) 2010 Russ Olsen and released under the Apache 2.0 license.
+Copyright (c) 2010-2011 Russ Olsen and released under the Apache 2.0 license.
