@@ -1,6 +1,6 @@
 h2. Dejour
 
-.bq _de jour_ (adj) Available and being served on this day.
+_de jour_ (adj) Available and being served on this day.
 
 Dejour provides an easy, _works out of the box_ experience for the Clojure programming language. Clojure is a JVM-hosted, functional, general-purpose LISP variant that is especially adept at concurrent programming. You can find the clojure source and original downloads at "http://clojure.org":http://clojure.org.
 
