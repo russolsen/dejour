@@ -4,6 +4,10 @@ regular_objects := args.o  classpath.o main.o
 
 all: install
 
+release: install
+	rm -f ../bin/cljw.exe ../bin/clj.exe
+	cp cljw.exe clj.exe ../bin
+        
 install: cljw.exe clj.exe
      
 paths_no_console.o: main.c
