@@ -1,5 +1,7 @@
 h2. Dejour
 
+.bq _de jour_ (adj) Available and being served on this day.
+
 Dejour provides an easy, _works out of the box_ experience for the Clojure programming language. Clojure is a JVM-hosted, functional, general-purpose LISP variant that is especially adept at concurrent programming. You can find the clojure source and original downloads at "http://clojure.org":http://clojure.org.
 
 Unfortunately, while clojure.org provides the superb Clojure language as well as clojure-contrib (a set of useful libraries) there are a few things missing. The most important missing bit is a script that will run Clojure. Also missing is the very useful "JLine":http://jline.sourceforge.net providing a more robust interactive clojure interpreter or REPL.
