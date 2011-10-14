@@ -3,10 +3,7 @@
 
   <property environment="env"/>
 
-  <property name="clojure-version" value="1.1.0" />
-  <property name="clojure-contrib-version" value="1.1.0" />
-  <property name="jline-version" value="0.9.94" />
-
+  <property name="dejour-version" value="d"/>
 
   <target name="install-ivy" description="install ivy">
     <path id="ivy.lib.path">
@@ -16,25 +13,6 @@
              uri="antlib:org.apache.ivy.ant"
              classpathref="ivy.lib.path" />
   </target>
-
-<!--
-    <conf name="jline"
-          description="Just just jline"/>
-
-    <conf name="minimal-1.2.1c"
-          description="Just clojure 1.2, no contrib libraries"/>
-
-    <conf name="complete-1.2.1c"
-          extends="minimal-1.2.1c"
-          description="Clojure 1.2, plus contrib libraries"/>
-
-    <conf name="minimal-1.3.0c"
-          description="Just clojure, no contrib libraries"/>
-
-    <conf name="complete-1.3.0c"
-          extends="minimal-1.3.0c"
-          description="Clojure plus all the contribs"/>
--->
 
   <property name="pattern-with-rev" 
     value="${basedir}/downloads/[conf]/[artifact]-[revision].[ext]"/>
@@ -52,60 +30,61 @@
   </target>
 
   <macrodef name="create-dejour-release">
-    <attribute name="ivy-conf-name"/>
-    <attribute name="name" default="dejour-@{ivy-conf-name}"/>
+    <attribute name="name"/>
+    <attribute name="rel-name" 
+      default="dejour-@{name}${dejour-version}"/>
 
     <sequential>
-      <mkdir dir="build/@{name}/lib"/>
-      <copy todir="build/@{name}">
+      <mkdir dir="build/@{rel-name}/lib"/>
+      <copy todir="build/@{rel-name}">
         <fileset dir="${basedir}">
           <include  name="bin/**/*"/>
           <include  name="examples/**/*"/>
         </fileset>
       </copy>
 
-      <copy tofile="build/@{name}/syslib/jline.jar" flatten="true">
+      <copy tofile="build/@{rel-name}/syslib/jline.jar" flatten="true">
         <fileset dir="${basedir}">
           <include  name="downloads/jline/jline*.jar"/>
         </fileset>
       </copy>
 
-      <copy todir="build/@{name}/lib" flatten="true">
+      <copy todir="build/@{rel-name}/lib" flatten="true">
         <fileset dir="${basedir}">
-          <include  name="downloads/@{ivy-conf-name}/**/*"/>
+          <include  name="downloads/@{name}/**/*"/>
         </fileset>
       </copy>
 
       <chmod perm="ugo+x">
-        <fileset dir="build/@{name}"/>
+        <fileset dir="build/@{rel-name}"/>
       </chmod>
       
 
-      <zip destfile="build/@{name}.zip"
+      <zip destfile="build/@{rel-name}.zip"
            basedir="build/" 
            includes="@{name}/**/*"/>
 
 
-      <tar destfile="build/@{name}.tar">
+      <tar destfile="build/@{rel-name}.tar">
         <tarfileset dir="build" filemode="755">
           <include name="@{name}/bin/**/*"/>
         </tarfileset>
         <tarfileset dir="build">
-          <include name="@{name}/**/*"/>
-          <exclude name="@{name}/bin/**/*"/>
+          <include name="@{rel-name}/**/*"/>
+          <exclude name="@{rel-name}/bin/**/*"/>
         </tarfileset>
       </tar> </sequential>
 
   </macrodef>
 
   <target name="all" depends="init" >
-    <create-dejour-release ivy-conf-name="minimal-1.2.1c"/>
+    <create-dejour-release name="minimal-1.2.1"/>
 
-    <create-dejour-release ivy-conf-name="complete-1.2.1c"/>
+    <create-dejour-release name="complete-1.2.1"/>
 
-    <create-dejour-release ivy-conf-name="minimal-1.3.0c"/>
+    <create-dejour-release name="minimal-1.3.0"/>
 
-    <create-dejour-release ivy-conf-name="complete-1.3.0c"/>
+    <create-dejour-release name="complete-1.3.0"/>
   </target>
 
   <target name="everything" depends="clj.exe, all"/>
@@ -129,7 +108,7 @@
 
 
   <target name="test">
-    <test-dejour-release ivy-conf-name="complete-1.2.1c"/>
+    <test-dejour-release ivy-conf-name="complete-1.2.1${dejour-version}"/>
   </target>
 
   <target name="clean">

@@ -5,58 +5,109 @@
     <conf name="jline" 
           description="Just just jline"/>
 
-    <conf name="minimal-1.2.1c" 
+    <conf name="minimal-1.2.1" 
           description="Just clojure 1.2, no contrib libraries"/>
 
-    <conf name="complete-1.2.1c" 
-          extends="minimal-1.2.1c"
+    <conf name="complete-1.2.1" 
+          extends="minimal-1.2.1"
           description="Clojure 1.2, plus contrib libraries"/>
 
-    <conf name="minimal-1.3.0c" 
+    <conf name="minimal-1.3.0" 
           description="Just clojure, no contrib libraries"/>
 
-    <conf name="complete-1.3.0c"
-          extends="minimal-1.3.0c"
+    <conf name="complete-1.3.0"
+          extends="minimal-1.3.0"
           description="Clojure plus all the contribs"/>
 
   </configurations>
   
   <dependencies>
+
+    <!-- 1.2.1 and contribs -->
+
     <dependency org="jline" name="jline" rev="0.9.92" 
                 conf="jline->default"/>
 
     <dependency org="org.clojure" name="clojure" rev="1.2.1" 
-                conf="minimal-1.2.1c->default"/>
+                conf="minimal-1.2.1->default"/>
 
     <dependency org="org.clojure" name="clojure-contrib" rev="1.2.0" 
-                conf="complete-1.2.1c->default"/>
+                conf="complete-1.2.1->default"/>
+
+
+    <!-- 1.3 and contribs -->
 
     <dependency org="org.clojure" name="clojure" rev="1.3.0" 
-                conf="minimal-1.3.0c->default"/>
-
-    <dependency org="org.clojure" name="tools.nrepl" rev="0.0.5"
-                conf="complete-1.3.0c->default"/>
+                conf="minimal-1.3.0->default"/>
 
     <dependency org="org.clojure" name="algo.monads" rev="0.1.0"
-                conf="complete-1.3.0c->default"/>
+                conf="complete-1.3.0->default"/>
 
     <dependency org="org.clojure" name="core.incubator" rev="0.1.0"
-                conf="complete-1.3.0c->default"/>
+                conf="complete-1.3.0->default"/>
 
     <dependency org="org.clojure" name="core.logic" rev="0.6.3"
-                conf="complete-1.3.0c->default"/>
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="core.match" rev="0.2.0-alpha5"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="core.unify" rev="0.5.1"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="data.csv" rev="0.1.0"
+                conf="complete-1.3.0->default"/>
 
     <dependency org="org.clojure" name="data.finger-tree" rev="0.0.1"
-                conf="complete-1.3.0c->default"/>
+                conf="complete-1.3.0->default"/>
 
     <dependency org="org.clojure" name="data.json" rev="0.1.1"
-                conf="complete-1.3.0c->default"/>
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="data.priority-map" rev="0.0.1"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="data.zip" rev="0.1.0"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="java.classpath" rev="0.2.0"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="tools.nrepl" rev="0.0.5"
+                conf="complete-1.3.0->default"/>
 
     <dependency org="org.clojure" name="java.classpath" rev="0.1.0"
-                conf="complete-1.3.0c->default"/>
+                conf="complete-1.3.0->default"/>
 
     <dependency org="org.clojure" name="java.jdbc" rev="0.0.6"
-                conf="complete-1.3.0c->default"/>
+                conf="complete-1.3.0->default"/>
 
-  </dependencies>
+    <dependency org="org.clojure" name="java.jmx" rev="0.1"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="math.combinatorics" rev="0.0.1"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="test.generative" rev="0.1.3"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="tools.cli" rev="0.1.0"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="tools.logging" rev="0.2.3"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="tools.macro" rev="0.1.1"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="tools.namespace" rev="0.1.1"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="tools.nrepl" rev="0.0.5"
+                conf="complete-1.3.0->default"/>
+
+    <dependency org="org.clojure" name="tools.trace" rev="0.7.1"
+                conf="complete-1.3.0->default"/>
+
+   </dependencies>
 </ivy-module>
