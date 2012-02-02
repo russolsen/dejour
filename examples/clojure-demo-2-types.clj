@@ -15,13 +15,13 @@
 
 ; Big numbers long/BigInteger
 
-(* 99999999 999999999999999)
+(* 99999999 (BigInteger. "999999999999999"))
 
 ; Symbols refer to things
 
-(def x 99)
+(def y 99)
 
-x      ; is a symbol, refers to 99
+y      ; is a symbol, refers to 99
 max    ; is a function
 +      ; so is +
 java.lang.String
@@ -41,7 +41,7 @@ java.lang.String
 
 ; Bind it to a name
 
-(set x '( a b c (d e (f g) h i ) j ))
+(def x '( a b c (d e (f g) h i ) j ))
 
 ; Get the first item of the list
 
@@ -53,7 +53,7 @@ java.lang.String
 
 ; concatenate it to another list
 
-(concat x '( 1 2 3 )
+(concat x '( 1 2 3 ))
 
 ; Add an element to the front
 
@@ -90,7 +90,7 @@ java.lang.String
 
 (eval p)
 
-; Evaluating clojure code 
+; Evaluating clojure code
 ; Many things evaluate to themselves
 
 1
@@ -100,7 +100,7 @@ p
 concat
 
 ; Feed clojure a list and it will take the first
-; item of the list as a function and try to 
+; item of the list as a function and try to
 ; evaluate the function using the rest as
 ; arguments
 
