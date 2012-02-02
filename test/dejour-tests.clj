@@ -11,7 +11,7 @@
     name))
 
 (defn run [cmd]
-  (apply sh 
+  (apply sh
     (cons
       (executable (first cmd))
       (rest cmd))))
@@ -30,8 +30,8 @@
 
 ; core jar files and main classes
 
-(output-matches? ["clj" "-debug"] #"lib.clojure\.jar" "Contains clojure.jar")
-(output-matches? ["clj" "-debug"] #"lib.clojure-contrib\.jar" "Contains contrib")
+(output-matches? ["clj" "-debug"] #"lib.clojure-[\d.]+\.jar" "Contains clojure.jar")
+(output-matches? ["clj" "-debug"] #"lib.clojure-contrib-[\d.]+\.jar" "Contains contrib")
 (output-matches? ["clj" "-debug"] #"lib.jline\.jar" "Contains jline.jar")
 (output-matches? ["clj" "-debug"] #"jline\.ConsoleRunner" "Contains console runner")
 (output-matches? ["clj" "-debug"] #"clojure\.main$" "contains clojure main")
