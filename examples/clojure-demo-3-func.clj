@@ -59,9 +59,9 @@ File
 
 ; We can use reduce to add them all together
 
-(reduce + (map file-len (filter file? (.listFiles x)))
+(reduce + (map file-len (filter file? (.listFiles x))))
 
 ; The turn this into a function
 
-(defn total-length [f] 
-  (reduce + (map file-len (filter file? (.listFiles f)))
+(defn total-length [f]
+  (reduce + (map file-len (filter file? (.listFiles f)))))
