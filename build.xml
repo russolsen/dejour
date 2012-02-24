@@ -58,11 +58,13 @@
       <chmod perm="ugo+x">
         <fileset dir="build/@{rel-name}"/>
       </chmod>
-      
+
+      <echo>name = @{name}</echo>
+      <echo>rel-name = @{rel-name}</echo>
 
       <zip destfile="build/@{rel-name}.zip"
            basedir="build/" 
-           includes="@{name}/**/*"/>
+           includes="@{rel-name}/**/*"/>
 
 
       <tar destfile="build/@{rel-name}.tar">
